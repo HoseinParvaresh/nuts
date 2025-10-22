@@ -18,7 +18,8 @@
   --color-primary : #733b17;
   --color-secondary : #d2b08d;
 
-  --breakpoint-3xs: 350px;
+  --breakpoint-4xs: 350px;
+  --breakpoint-3xs: 400px;
   --breakpoint-2xs: 450px;
   --breakpoint-xs: 530px;
   --breakpoint-sm: 640px;
