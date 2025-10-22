@@ -10,10 +10,13 @@
 
 }
 @utility container {
-  @apply px-5 xl:px-27.5 mx-auto;
+  @apply xl:px-27.5 mx-auto;
 }
 @theme {
   --font-josefinSans: "Josefin Sans";
+
+  --color-primary : #733b17;
+  --color-secondary : #d2b08d;
 
   --breakpoint-3xs: 350px;
   --breakpoint-2xs: 450px;
