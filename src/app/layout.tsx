@@ -14,7 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="font-josefinSans">
+      <body className="font-inter">
         {children}
       </body>
     </html>
