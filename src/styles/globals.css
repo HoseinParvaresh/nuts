@@ -1,4 +1,6 @@
 @import "tailwindcss";
+/* @import "tw-animate-css"; */
+
 
 @layer base {
 
@@ -19,7 +21,6 @@
     font-display: swap;
     src: url("/fonts/Poppins-ExtraBold.ttf") format("truetype");
   }
-
 
 }
 @utility container {
@@ -44,7 +45,7 @@
   --breakpoint-2xl: 1536px;
 }
 @layer components {
- 
+
   /* helper */
   .flex-center {
     @apply flex items-center justify-center

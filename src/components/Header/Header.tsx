@@ -6,6 +6,7 @@ import { FaTelegram } from "react-icons/fa";
 import { HiMiniBars3 } from "react-icons/hi2";
 import { HiMiniXMark } from "react-icons/hi2";
 import { useState } from "react";
+import { SelectLanguage } from "./SelectLanguage";
 export default function Header() {
 	const [toggle, setToggle] = useState<string>("hidden");
 	const [navToggle, setNavToggle] = useState<string>("-left-65");
@@ -25,19 +26,22 @@ export default function Header() {
 					<HiMiniBars3 className="size-7" />
 				</div>
 				{/* group name */}
-				<img className="size-40 lg:size-50 xl:size-60 hidden md:block" src="/images/logo2.png" alt="logo" />
+				<img className="size-40 lg:size-50 xl:size-55 hidden md:block" src="/images/logo2.png" alt="logo" />
 				{/* title and search box and number */}
 				<div className="flex flex-col item-center gap-4 w-full md:w-auto">
 					{/* top header text */}
 					<p className="text-2xl xs:text-4xl md:text-3xl lg:text-4xl font-poppinsBold text-left">Iran Nuts And Spices Trading Group</p>
 					{/* search box */}
-					<div className="flex-center w-full flex">
-						<div className="border-y-2 border-l-2 border-secondary rounded-l-md w-full">
-							<input placeholder="Search products..." className="outline-none w-full pl-2 p-1 md:p-3 placeholder:text-sm md:placeholder:text-base placeholder:text-primary text-primary" type="text" />
+					<div className="flex gap-5">
+						<div className="flex-center w-full flex">
+							<div className="border-y-2 border-l-2 border-secondary rounded-l-md w-full">
+								<input placeholder="Search products..." className="outline-none w-full pl-2 p-1 md:p-3 placeholder:text-sm md:placeholder:text-base placeholder:text-primary text-primary" type="text" />
+							</div>
+							<div className="bg-secondary text-primary p-[5.5px] md:p-[13.5px] border border-secondary rounded-r-md cursor-pointer">
+								<FiSearch className="size-5.5" />
+							</div>
 						</div>
-						<div className="bg-secondary text-primary p-[5.5px] md:p-[13.5px] border border-secondary rounded-r-md cursor-pointer">
-							<FiSearch className="size-5.5" />
-						</div>
+						<SelectLanguage/>
 					</div>
 					{/* number */}
 					<div className="flex flex-col gap-4">
@@ -52,7 +56,7 @@ export default function Header() {
 					</div>
 				</div>
 				{/* logo */}
-				<img className="h-40 lg:h-50 xl:h-60 w-50 lg:w-60 xl:w-70 hidden md:block" src="/images/logo1.png" alt="logo" />
+				<img className="h-40 lg:h-50 xl:h-55 w-50 lg:w-60 xl:w-65 hidden md:block" src="/images/logo1.png" alt="logo" />
 			</div>
 			{/* navbar */}
 			<div className={`fixed flex flex-col px-3 bg-white h-screen top-0 ${navToggle} w-67 z-20 transition-all duration-300`}>
