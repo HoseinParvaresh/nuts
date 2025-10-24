@@ -3,11 +3,11 @@ import "@/styles/globals.css";
 
 
 export const metadata: Metadata = {
-  title: "Home",
-  description: "Home",
+  title: "admin",
+  description: "Admin Dashboard",
 };
 
-export default function RootLayout({
+export default function AdminLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;

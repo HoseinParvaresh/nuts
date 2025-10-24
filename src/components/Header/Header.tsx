@@ -27,27 +27,27 @@ export default function Header() {
 				{/* group name */}
 				<img className="size-40 lg:size-50 xl:size-60 hidden md:block" src="/images/logo2.png" alt="logo" />
 				{/* title and search box and number */}
-				<div className="flex flex-col item-center gap-5 w-full md:w-auto">
+				<div className="flex flex-col item-center gap-4 w-full md:w-auto">
 					{/* top header text */}
-					<p className="text-[27px]/9 xs:text-4xl md:text-3xl lg:text-4xl xl:text-5xl font-interBold text-left mb-1">Iran Nuts And Spices Trading Group</p>
+					<p className="text-2xl xs:text-4xl md:text-3xl lg:text-4xl font-poppinsBold text-left">Iran Nuts And Spices Trading Group</p>
 					{/* search box */}
 					<div className="flex-center w-full flex">
 						<div className="border-y-2 border-l-2 border-secondary rounded-l-md w-full">
-							<input placeholder="Search products..." className="outline-none w-full pl-2 p-1 md:p-2 placeholder:text-sm md:placeholder:text-base placeholder:text-primary text-primary" type="text" />
+							<input placeholder="Search products..." className="outline-none w-full pl-2 p-1 md:p-3 placeholder:text-sm md:placeholder:text-base placeholder:text-primary text-primary" type="text" />
 						</div>
-						<div className="bg-secondary text-primary p-[5.5px] md:p-[9.8px] border border-secondary rounded-r-md cursor-pointer">
+						<div className="bg-secondary text-primary p-[5.5px] md:p-[13.5px] border border-secondary rounded-r-md cursor-pointer">
 							<FiSearch className="size-5.5" />
 						</div>
 					</div>
 					{/* number */}
-					<div className="flex flex-col gap-4 ">
-						<a href="" className="flex-center gap-2">
-							<FaWhatsapp className="size-8 lg:size-10 text-green-500" />
-							<span className="text-orange-400 font-interBold text-lg 2xs:text-xl lg:text-2xl xl:text-3xl">WhatsApp ( Country IRAN ) +989931882813</span>
+					<div className="flex flex-col gap-4">
+						<a href="#" className="bg-green-50 border border-green-200 rounded-xl p-3 flex items-center gap-2">
+							<FaWhatsapp className="text-green-600 text-3xl" />
+							<span className="text-green-700 font-medium text-[22px]">WhatsApp ( Country IRAN ) +989931882813</span>
 						</a>
-						<a href="" className="flex-center gap-2">
-							<FaTelegram className="size-8 lg:size-10 text-sky-500" />
-							<span className="text-orange-400 font-interBold text-lg 2xs:text-xl lg:text-2xl xl:text-3xl">Telegram ( Country IRAN ) +989931882813</span>
+						<a href="#" className="bg-sky-50 border border-sky-200 rounded-xl p-3 flex items-center gap-2">
+							<FaTelegram className="text-sky-600 text-3xl" />
+							<span className="text-sky-700 font-medium text-[22px]">Telegram ( Country IRAN ) +989931882813</span>
 						</a>
 					</div>
 				</div>
@@ -71,11 +71,11 @@ export default function Header() {
 					<div>
 						<a href="" className="flex-center gap-3 mb-5">
 							<FaWhatsapp className="size-10 text-green-500" />
-							<span className="text-orange-400 font-interBold text-xl">WhatsApp +989931882813</span>
+							<span className="text-orange-400 font-poppinsBold text-xl">WhatsApp +989931882813</span>
 						</a>
 						<a href="" className="flex-center gap-3">
 							<FaTelegram className="size-10 text-sky-500" />
-							<span className="text-orange-400 font-interBold text-xl">Telegram +989931882813</span>
+							<span className="text-orange-400 font-poppinsBold text-xl">Telegram +989931882813</span>
 						</a>
 					</div>
 				</div>
