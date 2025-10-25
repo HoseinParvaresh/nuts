@@ -3,6 +3,10 @@ import { SetStateAction, useState } from "react";
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 
+type Props = {
+	id: number
+}
+
 export default function Product() {
 	const images = [
 		{
@@ -19,9 +23,9 @@ export default function Product() {
 		},
 	];
 	const [isModalOpen, setIsModalOpen] = useState(false);
-	const [selectedProduct, setSelectedProduct] = useState(null);
+	const [selectedProduct, setSelectedProduct] = useState<Props | null>(null);
 
-	const openModal = (product) => {
+	const openModal = (product : Props) => {
 		setSelectedProduct(product);
 		setIsModalOpen(true);
 	};

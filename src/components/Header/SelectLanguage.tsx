@@ -19,7 +19,7 @@ export default function SelectLanguage() {
             style={{ aspectRatio: "24/24", objectFit: "cover" }}
           />
           <span className="font-medium">{selectedLanguage}</span>
-          <ChevronDownIcon className="h-4 w-4" />
+          <ChevronDownIcon />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[200px]">
@@ -97,10 +97,10 @@ export default function SelectLanguage() {
   )
 }
 
-function ChevronDownIcon(props) {
+function ChevronDownIcon() {
   return (
     <svg
-      {...props}
+      className="h-4 w-4"
       xmlns="http://www.w3.org/2000/svg"
       width="24"
       height="24"
