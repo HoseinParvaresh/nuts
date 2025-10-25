@@ -6,7 +6,7 @@ import { FaTelegram } from "react-icons/fa";
 import { HiMiniBars3 } from "react-icons/hi2";
 import { HiMiniXMark } from "react-icons/hi2";
 import { useState } from "react";
-import { SelectLanguage } from "./SelectLanguage";
+import SelectLanguage from "./SelectLanguage";
 export default function Header() {
 	const [toggle, setToggle] = useState<string>("hidden");
 	const [navToggle, setNavToggle] = useState<string>("-left-65");
@@ -26,9 +26,9 @@ export default function Header() {
 					<HiMiniBars3 className="size-7" />
 				</div>
 				{/* group name */}
-				<img className="size-40 lg:size-50 xl:size-55 hidden md:block" src="/images/logo2.png" alt="logo" />
+				<img className="size-40 lg:size-50 hidden md:block" src="/images/w3.png" alt="logo" />
 				{/* title and search box and number */}
-				<div className="flex flex-col item-center gap-4 w-full md:w-auto">
+				<div className="flex flex-col item-center gap-5 w-full md:w-auto">
 					{/* top header text */}
 					<p className="text-2xl xs:text-4xl md:text-3xl lg:text-4xl font-poppinsBold text-left">Iran Nuts And Spices Trading Group</p>
 					{/* search box */}
@@ -49,14 +49,14 @@ export default function Header() {
 							<FaWhatsapp className="text-green-600 text-3xl" />
 							<span className="text-green-700 font-medium text-[22px]">WhatsApp ( Country IRAN ) +989931882813</span>
 						</a>
-						<a href="#" className="bg-sky-50 border border-sky-200 rounded-xl p-3 flex items-center gap-2">
+						{/* <a href="#" className="bg-sky-50 border border-sky-200 rounded-xl p-3 flex items-center gap-2">
 							<FaTelegram className="text-sky-600 text-3xl" />
 							<span className="text-sky-700 font-medium text-[22px]">Telegram ( Country IRAN ) +989931882813</span>
-						</a>
+						</a> */}
 					</div>
 				</div>
 				{/* logo */}
-				<img className="h-40 lg:h-50 xl:h-55 w-50 lg:w-60 xl:w-65 hidden md:block" src="/images/logo1.png" alt="logo" />
+				<img className="h-40 lg:h-50 w-50 lg:w-60 hidden md:block" src="/images/logo1.png" alt="logo" />
 			</div>
 			{/* navbar */}
 			<div className={`fixed flex flex-col px-3 bg-white h-screen top-0 ${navToggle} w-67 z-20 transition-all duration-300`}>

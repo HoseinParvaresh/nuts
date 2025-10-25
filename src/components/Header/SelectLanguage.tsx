@@ -1,160 +1,117 @@
 "use client"
 
-import * as React from "react"
-import { Check, ChevronsUpDown } from "lucide-react"
-
-import { cn } from "@/lib/utils"
+import { useState } from "react"
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuGroup, DropdownMenuItem } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from "@/components/ui/command"
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover"
-import { link } from "fs"
 
-const languages = [
-  {
-    value: "Spanish",
-    label: "Spanish",
-    link: "",
-  },
-  {
-    value: "Arabic",
-    label: "Arabic",
-    link: ""
-  },
-  {
-    value: "French",
-    label: "French",
-    link: ""
-  },
-  {
-    value: "German",
-    label: "German",
-    link: ""
-  },
-  {
-    value: "Portuguese",
-    label: "Portuguese",
-    link: ""
-  },
-  {
-    value: "Russian",
-    label: "Russian",
-    link: ""
-  },
-  {
-    value: "Chinese",
-    label: "Chinese",
-    link: ""
-  },
-  {
-    value: "Japanese",
-    label: "Japanese",
-    link: ""
-  },
-  {
-    value: "Turkish",
-    label: "Turkish",
-    link: ""
-  },
-  {
-    value: "Persian",
-    label: "Persian",
-    link: ""
-  },
-  {
-    value: "Hindi",
-    label: "Hindi",
-    link: ""
-  },
-  {
-    value: "Indonesian",
-    label: "Indonesian",
-    link: ""
-  },
-  {
-    value: "Dutch",
-    label: "Dutch",
-    link: ""
-  },
-  {
-    value: "Thai",
-    label: "Thai",
-    link: ""
-  },
-  {
-    value: "Vietnamese",
-    label: "Vietnamese",
-    link: ""
-  },
-  {
-    value: "Polish",
-    label: "Polish",
-    link: ""
-  },
-  {
-    value: "Ukrainian",
-    label: "Ukrainian",
-    link: ""
-  }
-]
-
-export function SelectLanguage() {
-  const [open, setOpen] = React.useState(false)
-  const [value, setValue] = React.useState("")
-
+export default function SelectLanguage() {
+  const [selectedLanguage, setSelectedLanguage] = useState("English")
   return (
-    <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          role="combobox"
-          aria-expanded={open}
-          className="w-[200px] justify-between"
-        >
-          {value
-            ? languages.find((language) => language.value === value)?.label
-            : "Select Language"}
-          <ChevronsUpDown className="opacity-50" />
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline" className="flex items-center gap-2">
+          <img
+            src="/placeholder.svg"
+            alt="US Flag"
+            width={24}
+            height={24}
+            className="rounded-full"
+            style={{ aspectRatio: "24/24", objectFit: "cover" }}
+          />
+          <span className="font-medium">{selectedLanguage}</span>
+          <ChevronDownIcon className="h-4 w-4" />
         </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0">
-        <Command>
-          <CommandInput placeholder="Search Language..." className="h-9" />
-          <CommandList>
-            <CommandEmpty>No Language found.</CommandEmpty>
-            <CommandGroup>
-              {languages.map((language) => (
-                <CommandItem
-                  key={language.value}
-                  value={language.value}
-                  onSelect={(currentValue) => {
-                    setValue(currentValue === value ? "" : currentValue)
-                    setOpen(false)
-                  }}
-                >
-                  {language.label}
-                  <Check
-                    className={cn(
-                      "ml-auto",
-                      value === language.value ? "opacity-100" : "opacity-0"
-                    )}
-                  />
-                </CommandItem>
-              ))}
-            </CommandGroup>
-          </CommandList>
-        </Command>
-      </PopoverContent>
-    </Popover>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end" className="w-[200px]">
+        <DropdownMenuLabel>Select Language</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuGroup>
+          <DropdownMenuItem onClick={() => setSelectedLanguage("English")}>
+            <div className="flex items-center gap-2">
+              <img
+                src="/placeholder.svg"
+                alt="US Flag"
+                width={24}
+                height={24}
+                className="rounded-full"
+                style={{ aspectRatio: "24/24", objectFit: "cover" }}
+              />
+              <span>English</span>
+            </div>
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setSelectedLanguage("Espa\u00F1ol")}>
+            <div className="flex items-center gap-2">
+              <img
+                src="/placeholder.svg"
+                alt="Spanish Flag"
+                width={24}
+                height={24}
+                className="rounded-full"
+                style={{ aspectRatio: "24/24", objectFit: "cover" }}
+              />
+              <span>Español</span>
+            </div>
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setSelectedLanguage("Fran\u00E7ais")}>
+            <div className="flex items-center gap-2">
+              <img
+                src="/placeholder.svg"
+                alt="French Flag"
+                width={24}
+                height={24}
+                className="rounded-full"
+                style={{ aspectRatio: "24/24", objectFit: "cover" }}
+              />
+              <span>Français</span>
+            </div>
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setSelectedLanguage("Deutsch")}>
+            <div className="flex items-center gap-2">
+              <img
+                src="/placeholder.svg"
+                alt="German Flag"
+                width={24}
+                height={24}
+                className="rounded-full"
+                style={{ aspectRatio: "24/24", objectFit: "cover" }}
+              />
+              <span>Deutsch</span>
+            </div>
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setSelectedLanguage("\u4E2D\u6587")}>
+            <div className="flex items-center gap-2">
+              <img
+                src="/placeholder.svg"
+                alt="Chinese Flag"
+                width={24}
+                height={24}
+                className="rounded-full"
+                style={{ aspectRatio: "24/24", objectFit: "cover" }}
+              />
+              <span>中文</span>
+            </div>
+          </DropdownMenuItem>
+        </DropdownMenuGroup>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  )
+}
+
+function ChevronDownIcon(props) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="m6 9 6 6 6-6" />
+    </svg>
   )
 }
