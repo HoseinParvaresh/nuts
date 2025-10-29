@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
-import "@/styles/globals.css";
 
 
 export const metadata: Metadata = {
-  title: "admin",
-  description: "Admin Dashboard",
+  title: "Dashboard",
+  description: "AdminDashboard",
 };
 
 export default function AdminLayout({
@@ -13,10 +12,8 @@ export default function AdminLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="font-poppins">
+      <div className="font-dana">
         {children}
-      </body>
-    </html>
+      </div>
   );
 }

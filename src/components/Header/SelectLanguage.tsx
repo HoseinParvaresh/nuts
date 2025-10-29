@@ -5,20 +5,21 @@ import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuLab
 import { Button } from "@/components/ui/button"
 
 export default function SelectLanguage() {
-  const [selectedLanguage, setSelectedLanguage] = useState("English")
+  const [selectedLanguage, setSelectedLanguage] = useState(["English","en-flag"])
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" className="flex items-center gap-2">
+        <Button variant="outline" className="flex items-center gap-2 h-12">
           <img
-            src="/placeholder.svg"
+            src={`/svg/${selectedLanguage[1]}.svg`}
             alt="US Flag"
             width={24}
             height={24}
             className="rounded-full"
             style={{ aspectRatio: "24/24", objectFit: "cover" }}
           />
-          <span className="font-medium">{selectedLanguage}</span>
+          <span className="font-medium">{selectedLanguage[0]}</span>
           <ChevronDownIcon />
         </Button>
       </DropdownMenuTrigger>
@@ -26,10 +27,11 @@ export default function SelectLanguage() {
         <DropdownMenuLabel>Select Language</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem onClick={() => setSelectedLanguage("English")}>
-            <div className="flex items-center gap-2">
+
+          <DropdownMenuItem className="p-1" onClick={() => setSelectedLanguage(["English","en-flag"])}>
+            <a href="#" className="flex items-center gap-2">
               <img
-                src="/placeholder.svg"
+                src="/svg/en-flag.svg"
                 alt="US Flag"
                 width={24}
                 height={24}
@@ -37,12 +39,12 @@ export default function SelectLanguage() {
                 style={{ aspectRatio: "24/24", objectFit: "cover" }}
               />
               <span>English</span>
-            </div>
+            </a>
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => setSelectedLanguage("Espa\u00F1ol")}>
-            <div className="flex items-center gap-2">
+          <DropdownMenuItem className="p-1" onClick={() => setSelectedLanguage(["Español","es-flag"])}>
+            <a href="#" className="flex items-center gap-2">
               <img
-                src="/placeholder.svg"
+                src="/svg/es-flag.svg"
                 alt="Spanish Flag"
                 width={24}
                 height={24}
@@ -50,12 +52,12 @@ export default function SelectLanguage() {
                 style={{ aspectRatio: "24/24", objectFit: "cover" }}
               />
               <span>Español</span>
-            </div>
+            </a>
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => setSelectedLanguage("Fran\u00E7ais")}>
-            <div className="flex items-center gap-2">
+          <DropdownMenuItem className="p-1" onClick={() => setSelectedLanguage(["Français","fr-flag"])}>
+            <a href="#" className="flex items-center gap-2">
               <img
-                src="/placeholder.svg"
+                src="/svg/fr-flag.svg"
                 alt="French Flag"
                 width={24}
                 height={24}
@@ -63,12 +65,12 @@ export default function SelectLanguage() {
                 style={{ aspectRatio: "24/24", objectFit: "cover" }}
               />
               <span>Français</span>
-            </div>
+            </a>
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => setSelectedLanguage("Deutsch")}>
-            <div className="flex items-center gap-2">
+          <DropdownMenuItem className="p-1" onClick={() => setSelectedLanguage(["Deutsch","gr-flag"])}>
+            <a href="#" className="flex items-center gap-2">
               <img
-                src="/placeholder.svg"
+                src="/svg/gr-flag.svg"
                 alt="German Flag"
                 width={24}
                 height={24}
@@ -76,20 +78,111 @@ export default function SelectLanguage() {
                 style={{ aspectRatio: "24/24", objectFit: "cover" }}
               />
               <span>Deutsch</span>
-            </div>
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => setSelectedLanguage("\u4E2D\u6587")}>
-            <div className="flex items-center gap-2">
+            </a>
+          </DropdownMenuItem>     
+          <DropdownMenuItem className="p-1" onClick={() => setSelectedLanguage(["Português","pr-flag"])}>
+            <a href="#" className="flex items-center gap-2">
               <img
-                src="/placeholder.svg"
-                alt="Chinese Flag"
+                src="/svg/pr-flag.svg"
+                alt="Português Flag"
+                width={24}
+                height={24}
+                className="rounded-full"
+                style={{ aspectRatio: "24/24", objectFit: "cover" }}
+              />
+              <span>Português</span>
+            </a>
+          </DropdownMenuItem>
+          <DropdownMenuItem className="p-1" onClick={() => setSelectedLanguage(["Italiano","it-flag"])}>
+            <a href="#" className="flex items-center gap-2">
+              <img
+                src="/svg/it-flag.svg"
+                alt="Italiano Flag"
+                width={24}
+                height={24}
+                className="rounded-full"
+                style={{ aspectRatio: "24/24", objectFit: "cover" }}
+              />
+              <span>Italiano</span>
+            </a>
+          </DropdownMenuItem>
+          <DropdownMenuItem className="p-1" onClick={() => setSelectedLanguage(["Русский","rs-flag"])}>
+            <a href="#" className="flex items-center gap-2">
+              <img
+                src="/svg/rs-flag.svg"
+                alt="Russia Flag"
+                width={24}
+                height={24}
+                className="rounded-full"
+                style={{ aspectRatio: "24/24", objectFit: "cover" }}
+              />
+              <span>Русский</span>
+            </a>
+          </DropdownMenuItem>
+          <DropdownMenuItem className="p-1" onClick={() => setSelectedLanguage(["中文","ch-flag"])}>
+            <a href="#" className="flex items-center gap-2">
+              <img
+                src="/svg/ch-flag.svg"
+                alt="china Flag"
                 width={24}
                 height={24}
                 className="rounded-full"
                 style={{ aspectRatio: "24/24", objectFit: "cover" }}
               />
               <span>中文</span>
-            </div>
+            </a>
+          </DropdownMenuItem>         
+          <DropdownMenuItem className="p-1" onClick={() => setSelectedLanguage(["日本語","jp-flag"])}>
+            <a href="#" className="flex items-center gap-2">
+              <img
+                src="/svg/jp-flag.svg"
+                alt="japan Flag"
+                width={24}
+                height={24}
+                className="rounded-full"
+                style={{ aspectRatio: "24/24", objectFit: "cover" }}
+              />
+              <span>日本語</span>
+            </a>
+          </DropdownMenuItem>
+          <DropdownMenuItem className="p-1" onClick={() => setSelectedLanguage(["한국어","sk-flag"])}>
+            <a href="#" className="flex items-center gap-2">
+              <img
+                src="/svg/sk-flag.svg"
+                alt="South Korea Flag"
+                width={24}
+                height={24}
+                className="rounded-full"
+                style={{ aspectRatio: "24/24", objectFit: "cover" }}
+              />
+              <span>한국어</span>
+            </a>
+          </DropdownMenuItem>
+          <DropdownMenuItem className="p-1" onClick={() => setSelectedLanguage(["العربية","ar-flag"])}>
+            <a href="#" className="flex items-center gap-2">
+              <img
+                src="/svg/ar-flag.svg"
+                alt="arbia Flag"
+                width={24}
+                height={24}
+                className="rounded-full"
+                style={{ aspectRatio: "24/24", objectFit: "cover" }}
+              />
+              <span>العربية</span>
+            </a>
+          </DropdownMenuItem>
+          <DropdownMenuItem className="p-1" onClick={() => setSelectedLanguage(["Türkçe","tr-flag"])}>
+            <a href="#" className="flex items-center gap-2">
+              <img
+                src="/svg/tr-flag.svg"
+                alt="Türkçe Flag"
+                width={24}
+                height={24}
+                className="rounded-full"
+                style={{ aspectRatio: "24/24", objectFit: "cover" }}
+              />
+              <span>Türkçe</span>
+            </a>
           </DropdownMenuItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>

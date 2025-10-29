@@ -9,17 +9,25 @@
     font-display: swap;
     src: url("/fonts/Poppins-Regular.ttf") format("truetype");
   }
-
   @font-face {
     font-family: "Poppins-Bold";
     font-display: swap;
     src: url("/fonts/Poppins-Bold.ttf") format("truetype");
   }
-
   @font-face {
     font-family: "Poppins-ExtraBold";
     font-display: swap;
     src: url("/fonts/Poppins-ExtraBold.ttf") format("truetype");
+  }
+  @font-face {
+    font-family: "Dana";
+    font-display: swap;
+    src: url("/fonts/Dana.Regular.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Dana Bold";
+    font-display: swap;
+    src: url("/fonts/Dana-Bold.woff2") format("woff2");
   }
 
 }
@@ -29,7 +37,8 @@
 @theme {
   --font-poppins: "Poppins-Regular";
   --font-poppinsBold: "Poppins-Bold";
-  --font-poppinsExtraBold: "Poppins-ExtraBold";
+  --font-dana: "Dana";
+  --font-danaBold: "Dana Bold";
 
   --color-primary : #733b17;
   --color-secondary : #d2b08d;
