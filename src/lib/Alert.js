@@ -46,7 +46,7 @@ export default function Alert(order, text) {
     </div>
   ),
     {
-      duration: 1500,
+      duration: 2000,
       position: 'top-left',
     })
 }
