@@ -1,7 +1,7 @@
 import Header from "@/components/Header/Header";
 import Main from "@/components/Main/Main";
 import apiRequests from "@/services/config";
-
+export const dynamic = "force-dynamic"
 export default async function Home() {
 
 	const res = await apiRequests("/products")

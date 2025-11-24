@@ -5,6 +5,7 @@ const apiRequests = axios.create({
     headers: {
         "Content-Type": "application/json",
         Auth: "Bearer Token",
+        "Cache-Control": "no-cache"
     }
 })
 

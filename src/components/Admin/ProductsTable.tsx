@@ -15,7 +15,7 @@ import { FiEdit } from "react-icons/fi";
 import { AiOutlineEye } from "react-icons/ai";
 import { AiOutlineEyeInvisible } from "react-icons/ai";
 import { Label } from "@/components/ui/label";
-
+export const dynamic = "force-dynamic"
 export type Product = {
 	id: string;
 	title: string;
