@@ -2,6 +2,8 @@ import DashboardHeader from "@/components/Admin/DashboardHeader";
 import { ProductsTable } from "@/components/Admin/ProductsTable";
 import AddProducts from "@/components/Admin/AddProducts";
 import apiRequests from "@/services/config";
+export const dynamic = "force-dynamic"
+
 export default async function page() {
 	const res = await apiRequests.get("/products");
 	const products = res.data.reverse();
