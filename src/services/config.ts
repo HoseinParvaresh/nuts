@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiRequests = axios.create({
-    baseURL: 'https://nuts.runflare.run',
+    baseURL: 'http://api.irnst.ir',
     headers: {
         "Content-Type": "application/json",
         Auth: "Bearer Token",
