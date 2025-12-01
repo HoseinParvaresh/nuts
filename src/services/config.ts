@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiRequests = axios.create({
-    baseURL: 'http://api.irnst.ir',
+    baseURL: 'https://api.irnst.ir',
     headers: {
         "Content-Type": "application/json",
         Auth: "Bearer Token",

@@ -119,6 +119,32 @@ export default function SelectLanguage() {
               <span>Русский</span>
             </a>
           </DropdownMenuItem>
+          <DropdownMenuItem className="p-1" onClick={() => setSelectedLanguage(["Українська","uk-flag"])}>
+            <a href="#" className="flex items-center gap-2">
+              <img
+                src="/svg/ua-flag.svg"
+                alt="ua Flag"
+                width={24}
+                height={24}
+                className="rounded-full"
+                style={{ aspectRatio: "24/24", objectFit: "cover" }}
+              />
+              <span>Українська</span>
+            </a>
+          </DropdownMenuItem>
+          <DropdownMenuItem className="p-1" onClick={() => setSelectedLanguage(["Українська","uk-flag"])}>
+            <a href="#" className="flex items-center gap-2">
+              <img
+                src="/svg/🇺🇦-flag.svg"
+                alt="🇺🇦 Flag"
+                width={24}
+                height={24}
+                className="rounded-full"
+                style={{ aspectRatio: "24/24", objectFit: "cover" }}
+              />
+              <span>Українська</span>
+            </a>
+          </DropdownMenuItem>
           <DropdownMenuItem className="p-1" onClick={() => setSelectedLanguage(["中文","ch-flag"])}>
             <a href="#" className="flex items-center gap-2">
               <img

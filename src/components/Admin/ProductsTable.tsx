@@ -15,16 +15,18 @@ import { FiEdit } from "react-icons/fi";
 import { AiOutlineEye } from "react-icons/ai";
 import { AiOutlineEyeInvisible } from "react-icons/ai";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "../ui/textarea";
 
-export const dynamic = "force-dynamic"
+export const dynamic = "force-dynamic";
 export type Product = {
 	id: string;
 	title: string;
 	images: [{ image1: string; primary: boolean }, { image2: string; primary: boolean }];
 	show: boolean;
+	description: string;
 };
 
-export const columns = (toggleShow: (id: string, show: boolean) => void, removeProduct: (id: string) => void): ColumnDef<Product>[] => [
+export const columns = (toggleShow: (id: string, show: boolean) => void, removeProduct: (id: string) => void, editProduct: (id: string, title: string, description: string, image1: File | string, image2: File | string) => void): ColumnDef<Product>[] => [
 	{
 		accessorKey: "id",
 		header: "شناسه",
@@ -36,14 +38,32 @@ export const columns = (toggleShow: (id: string, show: boolean) => void, removeP
 		cell: ({ row }) => <div className="capitalize text-lg">{row.getValue("title")}</div>,
 	},
 	{
+		accessorKey: "description",
+		header: "توضیحات",
+		cell: ({ row }) => {
+			const desc = row.original.description.split("/");
+
+			return (
+				<div className="capitalize text-sm">
+					<ul>
+						{desc.map((item, index) => (
+							<li key={index}>{item}</li>
+						))}
+					</ul>
+				</div>
+			);
+			// <div className="capitalize text-sm">{row.getValue("description")}</div>
+		},
+	},
+	{
 		accessorKey: "primary image",
 		header: "عکس اول",
 		cell: ({ row }) => {
 			const images = row.original.images;
 
 			return (
-				<div className="flex gap-2">
-					<img src={`${images[0].image1}`} alt="product" className="w-12 h-12 object-cover rounded" />
+				<div className="flex gap-2 size-20">
+					<img src={`${images[0].image1}`} alt="product" className="object-cover rounded" />
 				</div>
 			);
 		},
@@ -55,8 +75,8 @@ export const columns = (toggleShow: (id: string, show: boolean) => void, removeP
 			const images = row.original.images;
 
 			return (
-				<div className="flex gap-2">
-					<img src={`${images[1].image2}`} alt="product" className="w-12 h-12 object-cover rounded" />
+				<div className="flex gap-2 size-20">
+					<img src={`${images[1].image2}`} alt="product" className="object-cover rounded" />
 				</div>
 			);
 		},
@@ -66,12 +86,22 @@ export const columns = (toggleShow: (id: string, show: boolean) => void, removeP
 		enableHiding: false,
 		cell: ({ row }) => {
 			const product = row.original;
+			const [title, setTitle] = React.useState(product.title);
+			const [description, setDescription] = React.useState(product.description);
+			const [image1, setImage1] = React.useState<File | string>(product.images[0].image1);
+			const [image2, setImage2] = React.useState<File | string>(product.images[1].image2);
 
+			const previewImage = (e: any) => {
+				const [file] = e.target.files;
+				if (file) {
+					e.target.nextElementSibling.src = URL.createObjectURL(file);
+				}
+			};
 			return (
 				<div className="flex gap-3">
 					{/* show / hide */}
 					<div onClick={() => toggleShow(product.id, product.show)} className="p-1.5 text-white bg-sky-500 max-w-max rounded-md cursor-pointer">
-						{product.show ? <AiOutlineEye className="size-5" /> : <AiOutlineEyeInvisible className="size-5" />}
+						{product.show ? <AiOutlineEye className="size-5" /> : <AiOutlineEyeInvisible className="size-5 text-red-300" />}
 					</div>
 					{/* edit */}
 					<Dialog>
@@ -90,15 +120,47 @@ export const columns = (toggleShow: (id: string, show: boolean) => void, removeP
 										<Label htmlFor="name-1" className="font-dana">
 											عنوان
 										</Label>
-										<Input value={product.title} id="name-1" name="name" required />
+										<Input value={title} onChange={(e) => setTitle(e.target.value)} id="name-1" name="name" required />
+									</div>
+									<div className="grid gap-3">
+										<Label htmlFor="name-2" className="font-dana">
+											توضیحات
+										</Label>
+										<Textarea value={description} onChange={(e) => setDescription(e.target.value)} id="name-2" />
 									</div>
 									<div className="grid gap-3">
 										<Label htmlFor="name-1" className="font-dana mt-4">
 											عکس ها
 										</Label>
 										<div className="grid grid-cols-2 gap-5 font-dana">
-											<img src={`${product.images[0].image1}`} alt="product" className="w-30 h-30 object-cover rounded" />
-											<img src={`${product.images[1].image2}`} alt="product" className="w-30 h-30 object-cover rounded" />
+											<label htmlFor="file-1" className="flex flex-col items-center justify-center w-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
+												<img src={image1} alt="" />
+												<input
+													accept="image/*"
+													onChange={(e) => {
+														e.target.files ? setImage1(e.target.files[0]) : "";
+														previewImage(e);
+													}}
+													id="file-1"
+													type="file"
+													className="hidden"
+												/>
+												<img id="blah" src="/" alt="" />
+											</label>
+											<label htmlFor="file-2" className="flex flex-col items-center justify-center w-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
+												<img src={image2} alt="" />
+												<input
+													accept="image/*"
+													onChange={(e) => {
+														e.target.files ? setImage2(e.target.files[0]) : "";
+														previewImage(e);
+													}}
+													id="file-2"
+													type="file"
+													className="hidden"
+												/>
+												<img id="blah" src="/" alt="" />
+											</label>
 										</div>
 									</div>
 								</div>
@@ -108,8 +170,8 @@ export const columns = (toggleShow: (id: string, show: boolean) => void, removeP
 											بستن
 										</Button>
 									</DialogClose>
-									<Button className="font-dana" type="submit">
-										تایید
+									<Button className="font-dana" type="submit" onClick={() => editProduct(product.id, title, description, image1, image2)}>
+										ویرایش
 									</Button>
 								</DialogFooter>
 							</DialogContent>
@@ -160,7 +222,7 @@ export function ProductsTable({ data }: { data: Product[] }) {
 			.patch(`/products/${id}`, { show: !show })
 			.then((res) => {
 				setProducts((prev) => prev.map((p) => (p.id === id ? { ...p, show: !show } : p)));
-				Alert("info", show ? "محصول پنهان شد" : "محصول نمایش داده شد");
+				Alert("success", show ? "محصول پنهان شد" : "محصول نمایش داده شد");
 			})
 			.catch((res) => Alert("error", "وضعیت محصول تغییری نکرد"));
 	};
@@ -169,18 +231,23 @@ export function ProductsTable({ data }: { data: Product[] }) {
 			.delete(`/products/${id}`)
 			.then((res) => {
 				setProducts((prev) => prev.filter((p) => p.id !== id));
-				Alert("info", "محصول با موفقیت حذف شد");
+				Alert("success", "محصول با موفقیت حذف شد");
 			})
 			.catch((res) => {
-				Alert("error", "محصول حذف نشد")
+				Alert("error", "محصول حذف نشد");
 			});
-
-		
+	};
+	const editProduct = async (id: string, title: string, description: string, image1: File | string, image2: File | string) => {
+		console.log(id);
+		console.log(title);
+		console.log(description);
+		console.log(image1);
+		console.log(image2);
 	};
 
 	const table = useReactTable({
 		data: products,
-		columns: columns(toggleShow, removeProduct),
+		columns: columns(toggleShow, removeProduct, editProduct),
 		onSortingChange: setSorting,
 		onColumnFiltersChange: setColumnFilters,
 		getCoreRowModel: getCoreRowModel(),

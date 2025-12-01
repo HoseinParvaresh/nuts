@@ -8,6 +8,7 @@ import { useState } from "react";
 import Alert from "@/lib/Alert";
 import apiRequests from "@/services/config";
 import styled from "styled-components";
+import { Textarea } from "../ui/textarea";
 
 export type images = {
 	image: string;
@@ -98,6 +99,8 @@ const StyledWrapper = styled.div`
 
 export default function AddProducts() {
 	const [title, setTitle] = useState("");
+	const [description, setDescription] = useState("");
+	const [loading, setLoading] = useState(false);
 	const [image1, setImage1] = useState<File | null>(null);
 	const [image2, setImage2] = useState<File | null>(null);
 
@@ -113,6 +116,7 @@ export default function AddProducts() {
 			Alert("error", "عنوان وارد نشده");
 			return false;
 		}
+		setLoading(true);
 
 		let uploadedImages = [
 			{ image1: "", primary: true },
@@ -130,12 +134,24 @@ export default function AddProducts() {
 		const data = {
 			title,
 			show: true,
+			description,
 			images: uploadedImages,
 		};
+
 		apiRequests
 			.post("/products", data)
-			.then(() => Alert("success", "محصول با موفقیت ثبت شد"))
-			.catch(() => Alert("error", "محصول ثبت نشد"));
+			.then(() => {
+				Alert("success", "محصول با موفقیت ثبت شد");
+				setTitle("")
+				setDescription("")
+				setLoading(false);
+			})
+			.catch(() => {
+				Alert("error", "محصول ثبت نشد");
+				setTitle("")
+				setDescription("")
+				setLoading(false);
+			});
 	}
 	const upload = async (file: any) => {
 		const upload_preset = "user_images";
@@ -185,6 +201,12 @@ export default function AddProducts() {
 								عنوان
 							</Label>
 							<Input value={title} onChange={(e) => setTitle(e.target.value)} id="name-1" name="name" required />
+						</div>
+						<div className="grid gap-3">
+							<Label htmlFor="name-1" className="font-dana">
+								توضیحات
+							</Label>
+							<Textarea value={description} onChange={(e) => setDescription(e.target.value)} id="name-1" required />
 						</div>
 						<div className="grid grid-cols-2 gap-5 font-dana">
 							<label htmlFor="file-1" className="flex flex-col items-center justify-center w-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
@@ -239,9 +261,15 @@ export default function AddProducts() {
 								بستن
 							</Button>
 						</DialogClose>
-						<Button className="font-dana" onClick={createProduct} type="submit">
-							ساخت محصول
-						</Button>
+						{!loading ? (
+							<Button className="font-dana cursor-pointer" onClick={createProduct} type="submit">
+								ایجاد محصول
+							</Button>
+						) : (
+							<Button className="font-dana cursor-pointer" variant="outline" disabled>
+								...در حال ایجاد
+							</Button>
+						)}
 					</DialogFooter>
 				</DialogContent>
 			</form>
