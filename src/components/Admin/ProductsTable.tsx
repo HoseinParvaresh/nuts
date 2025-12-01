@@ -18,15 +18,20 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "../ui/textarea";
 
 export const dynamic = "force-dynamic";
+type ProductImage = {
+	image1?: string | File;
+	image2?: string | File;
+	primary: boolean;
+  };
 export type Product = {
 	id: string;
 	title: string;
-	images: [{ image1: string; primary: boolean }, { image2: string; primary: boolean }];
+	images: ProductImage[];
 	show: boolean;
 	description: string;
 };
 
-export const columns = (toggleShow: (id: string, show: boolean) => void, removeProduct: (id: string) => void, editProduct: (id: string, title: string, description: string, image1: File | string, image2: File | string) => void): ColumnDef<Product>[] => [
+export const columns = (toggleShow: (id: string, show: boolean) => void, removeProduct: (id: string) => void, editProduct: (id: string, title: string, description: string, image1: File | string | undefined, image2: File | string | undefined,show:boolean) => void): ColumnDef<Product>[] => [
 	{
 		accessorKey: "id",
 		header: "شناسه",
@@ -88,8 +93,8 @@ export const columns = (toggleShow: (id: string, show: boolean) => void, removeP
 			const product = row.original;
 			const [title, setTitle] = React.useState(product.title);
 			const [description, setDescription] = React.useState(product.description);
-			const [image1, setImage1] = React.useState<File | string>(product.images[0].image1);
-			const [image2, setImage2] = React.useState<File | string>(product.images[1].image2);
+			const [image1, setImage1] = React.useState<File | string | undefined>(product.images[0].image1);
+			const [image2, setImage2] = React.useState<File | string | undefined>(product.images[1].image2);
 
 			const previewImage = (e: any) => {
 				const [file] = e.target.files;
@@ -170,7 +175,7 @@ export const columns = (toggleShow: (id: string, show: boolean) => void, removeP
 											بستن
 										</Button>
 									</DialogClose>
-									<Button className="font-dana" type="submit" onClick={() => editProduct(product.id, title, description, image1, image2)}>
+									<Button className="font-dana" type="submit" onClick={() => editProduct(product.id, title, description, image1, image2,product.show)}>
 										ویرایش
 									</Button>
 								</DialogFooter>
@@ -237,12 +242,65 @@ export function ProductsTable({ data }: { data: Product[] }) {
 				Alert("error", "محصول حذف نشد");
 			});
 	};
-	const editProduct = async (id: string, title: string, description: string, image1: File | string, image2: File | string) => {
-		console.log(id);
-		console.log(title);
-		console.log(description);
-		console.log(image1);
-		console.log(image2);
+	const upload = async (file: any) => {
+		const upload_preset = "user_images";
+		const cloud_name = "dt0lzjiwt";
+		const api_key = "695583444611436";
+
+		if (file.name === undefined) {
+			return false;
+		}
+
+		const formData = new FormData();
+		formData.append("file", file);
+		formData.append("upload_preset", upload_preset);
+		formData.append("api_key", api_key);
+
+		try {
+			const response = await fetch(`https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`, {
+				method: "POST",
+				body: formData,
+			});
+
+			const data = await response.json();
+
+			if (data.secure_url) {
+				return data.secure_url;
+			}
+		} catch (error) {
+			Alert("error", error);
+		}
+	};
+	const editProduct = async (id: string, title: string, description: string, image1: File | string | undefined, image2: File | string | undefined,show:boolean) => {
+
+		let uploadedImages = [
+			{ image1, primary: true },
+			{ image2, primary: false },
+		];
+		if (image1 instanceof File) {
+			const url1 = await upload(image1);
+			uploadedImages[0].image1 = url1;	
+		}
+		if (image2 instanceof File) {
+			const url2 = await upload(image2);
+			uploadedImages[1].image2 = url2;
+		}
+		const data = {
+			id,
+			title,
+			description,
+			show,
+			images: uploadedImages,
+		};
+		await apiRequests
+			.put(`/products/${id}`,data)
+			.then((res) => {
+				setProducts((prev) => prev.map(p => p.id === id ? data : p));
+				Alert("success", "محصول با موفقیت ویرایش شد");
+			})
+			.catch((res) => {
+				Alert("error", "محصول ویرایش نشد");
+			});
 	};
 
 	const table = useReactTable({
