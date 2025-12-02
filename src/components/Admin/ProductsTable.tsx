@@ -232,6 +232,7 @@ export function ProductsTable({ data }: { data: Product[] }) {
 			.catch((res) => Alert("error", "وضعیت محصول تغییری نکرد"));
 	};
 	const removeProduct = async (id: string) => {
+
 		await apiRequests
 			.delete(`/products/${id}`)
 			.then((res) => {
@@ -239,7 +240,7 @@ export function ProductsTable({ data }: { data: Product[] }) {
 				Alert("success", "محصول با موفقیت حذف شد");
 			})
 			.catch((res) => {
-				Alert("error", "محصول حذف نشد");
+				Alert("error", "محصول حذف نشد");			
 			});
 	};
 	const upload = async (file: any) => {

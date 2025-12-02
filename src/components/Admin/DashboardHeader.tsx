@@ -47,10 +47,12 @@ export default function DashboardHeader() {
 					<HiMiniXMark className="size-8 my-3" />
 				</div>
 				<ul className="flex flex-col gap-y-8 mt-10 px-10 *:cursor-pointer *:text-black/70 *:hover:text-black transition-colors">
-					<li>لیست محصولات</li>
-					<li>لیست شماره ها</li>
-					<li>لیست زبان ها</li>
-					<li>تنظیمات</li>
+					<li>
+						<a href="/admin">لیست محصولات</a>
+					</li>
+					<li>
+						<a href="/admin/numbers">لیست شماره ها</a>
+					</li>
 				</ul>
 			</div>
 		</div>
