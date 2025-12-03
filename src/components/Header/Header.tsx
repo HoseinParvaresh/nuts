@@ -79,7 +79,7 @@ export default function Header() {
 								<FiSearch className="size-5.5" />
 							</div>
 							<div id="search-drop_down" className={`absolute ${toggleSearchBox} scroll-style top-14 2xs:top-17 w-full border border-black/30 max-h-110 3xs:max-h-120 sm:max-h-110 overflow-scroll overflow-x-hidden right-0 shadow-md left-0 bg-white p-5 text-gray-900 rounded-md z-20 transition-all`}>
-								<div className="text-right grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-5">{searchValue.length ? searchValue.map((p) => <Product key={p.id} productData={p} />) : <p className="font-dana">متاسفانه نتیجه ای با مشخصات مورد نظر شما پیدا نشد!</p>}</div>
+								<div className="text-right grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-5">{searchValue.length ? searchValue.map((p) => <Product key={p.id} productData={p} />) : <p className="font-dana">Unfortunately, no results matching your criteria were found!</p>}</div>
 							</div>
 						</div>
 						<SelectLanguage />
@@ -131,16 +131,27 @@ export default function Header() {
 				<div className="flex flex-col gap-4">
 					<p className="font-poppinsBold mt-7 text-base">Contact us (Country IRAN)</p>
 					<div className="flex flex-col gap-4">
-						<a href="#" className="bg-green-50 border border-green-200 rounded-xl p-3 flex items-center gap-2">
-							<FaWhatsapp className="text-green-600 text-xl xs:text-3xl" />
-							<span className="text-green-700 font-medium text-sm xs:text-[22px]">WhatsApp +989931882813</span>
-						</a>
-						<a href="#" className="bg-sky-50 border border-sky-200 rounded-xl p-3 flex items-center gap-2">
-							<FaTelegram className="text-sky-600 text-xl xs:text-3xl" />
-							<span className="text-sky-700 font-medium text-sm xs:text-[22px]">Telegram +989931882813</span>
-						</a>
-					</div>
+					{numbers.map((n) =>
+						n.platform === "whatsapp" ? (
+							<a key={n.id} target="blank" href={`https://wa.me/${n.number}`} className="bg-green-50 border border-green-200 rounded-xl p-3 flex items-center gap-2">
+								<FaWhatsapp className="text-green-600 text-xl xs:text-3xl" />
+								<span className="text-green-700 font-medium text-sm xs:text-[22px]">WhatsApp {n.number}</span>
+							</a>
+						) : n.platform === "telegram" ? (
+							<a key={n.id} target="blank" href={`https://t.me/${n.number}`} className={`bg-sky-50 border border-sky-200 rounded-xl p-3 flex items-center gap-2`}>
+								<FaTelegram className="text-sky-600 text-xl xs:text-3xl" />
+								<span className="text-sky-700 font-medium text-sm xs:text-[22px]">Telegram {n.number}</span>
+							</a>
+						) : (
+							<a key={n.id} target="blank" href={`https://instagram.com/${n.number}`} className={`bg-pink-50 border border-pink-200 rounded-xl p-3 flex items-center gap-2`}>
+								<FaInstagram className="text-pink-600 text-xl xs:text-3xl" />
+								<span className="text-pink-700 font-medium text-sm xs:text-[22px]">Instagram {n.number}</span>
+							</a>
+						)
+					)}
 				</div>
+				</div>
+				
 			</div>
 		</div>
 	);
