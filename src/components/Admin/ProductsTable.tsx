@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { ColumnDef, ColumnFiltersState, flexRender, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, SortingState, useReactTable, VisibilityState } from "@tanstack/react-table";
-import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
@@ -57,7 +57,6 @@ export const columns = (toggleShow: (id: string, show: boolean) => void, removeP
 					</ul>
 				</div>
 			);
-			// <div className="capitalize text-sm">{row.getValue("description")}</div>
 		},
 	},
 	{
@@ -95,6 +94,7 @@ export const columns = (toggleShow: (id: string, show: boolean) => void, removeP
 			const [description, setDescription] = React.useState(product.description);
 			const [image1, setImage1] = React.useState<File | string | undefined>(product.images[0].image1);
 			const [image2, setImage2] = React.useState<File | string | undefined>(product.images[1].image2);
+			const [isEditing, setIsEditing] = React.useState(false);
 
 			const previewImage = (e: any) => {
 				const [file] = e.target.files;
@@ -175,8 +175,29 @@ export const columns = (toggleShow: (id: string, show: boolean) => void, removeP
 											بستن
 										</Button>
 									</DialogClose>
-									<Button className="font-dana" type="submit" onClick={() => editProduct(product.id, title, description, image1, image2,product.show)}>
-										ویرایش
+									<Button
+										className="font-dana"
+										type="button"
+										disabled={isEditing}
+										onClick={async (event) => {
+											event.preventDefault();
+											if (isEditing) return;
+											setIsEditing(true);
+											try {
+												await editProduct(product.id, title, description, image1, image2, product.show);
+											} finally {
+												setIsEditing(false);
+											}
+										}}
+									>
+										{isEditing ? (
+											<>
+												<Loader2 className="mr-2 size-4 animate-spin" />
+												در حال ویرایش...
+											</>
+										) : (
+											"ویرایش"
+										)}
 									</Button>
 								</DialogFooter>
 							</DialogContent>
