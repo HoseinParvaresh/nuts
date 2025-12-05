@@ -23,6 +23,9 @@ export default function AddProducts() {
 	const [loading, setLoading] = useState(false);
 	const [image1, setImage1] = useState<File | null>(null);
 	const [image2, setImage2] = useState<File | null>(null);
+	const [image3, setImage3] = useState<File | null>(null);
+	const [image4, setImage4] = useState<File | null>(null);
+	const [image5, setImage5] = useState<File | null>(null);
 
 	const previewImage = (e: any) => {
 		const [file] = e.target.files;
@@ -41,6 +44,9 @@ export default function AddProducts() {
 		let uploadedImages = [
 			{ image1: "", primary: true },
 			{ image2: "", primary: false },
+			{ image3: "", primary: false },
+			{ image4: "", primary: false },
+			{ image5: "", primary: false },
 		];
 
 		if (image1) {
@@ -51,11 +57,24 @@ export default function AddProducts() {
 			const url2 = await upload(image2);
 			uploadedImages[1].image2 = url2;
 		}
+		if (image3) {
+			const url3 = await upload(image3);
+			uploadedImages[2].image3 = url3;
+		}
+		if (image4) {
+			const url4 = await upload(image4);
+			uploadedImages[3].image4 = url4;
+		}
+		if (image5) {
+			const url5 = await upload(image5);
+			uploadedImages[4].image5 = url5;
+		}
 		const data = {
 			title,
 			show: true,
 			description,
 			images: uploadedImages,
+			main: true
 		};
 
 		apiRequests
@@ -128,7 +147,7 @@ export default function AddProducts() {
 							</Label>
 							<Textarea value={description} onChange={(e) => setDescription(e.target.value)} id="name-1" required />
 						</div>
-						<div className="grid grid-cols-2 gap-5 font-dana">
+						<div className="grid grid-cols-3 gap-5 font-dana">
 							<label htmlFor="file-1" className="flex flex-col items-center justify-center w-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
 								<div className="flex flex-col items-center justify-center pt-5 pb-6">
 									<svg className="w-8 h-8 mb-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
@@ -173,6 +192,73 @@ export default function AddProducts() {
 								/>
 								<img id="blah" src="/" alt="" />
 							</label>
+							<label htmlFor="file-3" className="flex flex-col items-center justify-center w-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
+								<div className="flex flex-col items-center justify-center pt-5 pb-6">
+									<svg className="w-8 h-8 mb-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+										<path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+									</svg>
+									<p className="hidden md:block mb-2 text-sm text-center text-gray-500">
+										<span>کلیک کنید</span> یا بکشید و رها کنید
+									</p>
+									<p className="hidden md:block mb-2 text-sm text-center text-gray-500 font-danaBold">عکس سوم</p>
+								</div>
+								<input
+									accept="image/*"
+									onChange={(e) => {
+										e.target.files ? setImage3(e.target.files[0]) : "";
+										previewImage(e);
+									}}
+									id="file-3"
+									type="file"
+									className="hidden"
+								/>
+								<img id="blah" src="/" alt="" />
+							</label>
+							<label htmlFor="file-4" className="flex flex-col items-center justify-center w-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
+								<div className="flex flex-col items-center justify-center pt-5 pb-6">
+									<svg className="w-8 h-8 mb-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+										<path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+									</svg>
+									<p className="hidden md:block mb-2 text-sm text-center text-gray-500">
+										<span>کلیک کنید</span> یا بکشید و رها کنید
+									</p>
+									<p className="hidden md:block mb-2 text-sm text-center text-gray-500 font-danaBold">عکس چهارم</p>
+								</div>
+								<input
+									accept="image/*"
+									onChange={(e) => {
+										e.target.files ? setImage4(e.target.files[0]) : "";
+										previewImage(e);
+									}}
+									id="file-4"
+									type="file"
+									className="hidden"
+								/>
+								<img id="blah" src="/" alt="" />
+							</label>
+							<label htmlFor="file-5" className="flex flex-col items-center justify-center w-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
+								<div className="flex flex-col items-center justify-center pt-5 pb-6">
+									<svg className="w-8 h-8 mb-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+										<path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+									</svg>
+									<p className="hidden md:block mb-2 text-sm text-center text-gray-500">
+										<span>کلیک کنید</span> یا بکشید و رها کنید
+									</p>
+									<p className="hidden md:block mb-2 text-sm text-center text-gray-500 font-danaBold">عکس پنجم</p>
+								</div>
+								<input
+									accept="image/*"
+									onChange={(e) => {
+										e.target.files ? setImage5(e.target.files[0]) : "";
+										previewImage(e);
+									}}
+									id="file-5"
+									type="file"
+									className="hidden"
+								/>
+								<img id="blah" src="/" alt="" />
+							</label>
+
 						</div>
 					</div>
 					<DialogFooter>

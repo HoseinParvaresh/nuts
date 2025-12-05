@@ -11,8 +11,10 @@ import Alert from "@/lib/Alert";
 import { FaWhatsapp } from "react-icons/fa";
 import { FaTelegram } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
-
+import { AiOutlineEye } from "react-icons/ai";
+import { AiOutlineEyeInvisible } from "react-icons/ai";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuGroup, DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import { FiEdit } from "react-icons/fi";
 import { Label } from "@/components/ui/label";
 
@@ -22,9 +24,10 @@ export type Numbers = {
 	id: string;
 	number: string;
 	platform: string;
+	show: boolean;
 };
 
-export const columns = (removeNumber: (id: string) => void, editNumber: (id: string, number: string, platform: string) => void): ColumnDef<Numbers>[] => [
+export const columns = (removeNumber: (id: string) => void, editNumber: (id: string, number: string, platform: string, show: boolean) => void, toggleShow: (id: string, show: boolean) => void): ColumnDef<Numbers>[] => [
 	{
 		accessorKey: "id",
 		header: "شناسه",
@@ -42,9 +45,7 @@ export const columns = (removeNumber: (id: string) => void, editNumber: (id: str
 			const platform = row.original.platform;
 			return (
 				<div className="flex items-center gap-2">
-					<div className="text-3xl">
-						{platform === 'whatsapp' ? <FaWhatsapp className="text-green-500"/> : platform === 'telegram' ? <FaTelegram className="text-sky-500"/> : <FaInstagram className="text-pink-500"/>}
-					</div>
+					<div className="text-3xl">{platform === "whatsapp" ? <FaWhatsapp className="text-green-500" /> : platform === "telegram" ? <FaTelegram className="text-sky-500" /> : <FaInstagram className="text-pink-500" />}</div>
 					<div className="text-lg">{platform}</div>
 				</div>
 			);
@@ -56,9 +57,14 @@ export const columns = (removeNumber: (id: string) => void, editNumber: (id: str
 		cell: ({ row }) => {
 			const numbers = row.original;
 			const [number, setNumber] = React.useState(numbers.number);
+			const [platform, setPlatform] = React.useState(numbers.platform);
 
 			return (
 				<div className="flex gap-3">
+					{/* show / hide */}
+					<div onClick={() => toggleShow(numbers.id, numbers.show)} className="p-1.5 text-white bg-sky-500 max-w-max rounded-md cursor-pointer">
+						{numbers.show ? <AiOutlineEye className="size-5" /> : <AiOutlineEyeInvisible className="size-5 text-red-300" />}
+					</div>
 					{/* edit */}
 					<Dialog>
 						<form className="self-end">
@@ -78,6 +84,37 @@ export const columns = (removeNumber: (id: string) => void, editNumber: (id: str
 										</Label>
 										<Input value={number} onChange={(e) => setNumber(e.target.value)} id="name-1" name="name" required />
 									</div>
+									<DropdownMenu>
+										<DropdownMenuTrigger asChild>
+											<Button variant="outline" className="flex items-center gap-2 h-12">
+												{platform === "whatsapp" ? <FaWhatsapp className="text-green-500 text-2xl size-6" /> : platform === "telegram" ? <FaTelegram className="text-sky-500 text-2xl size-6" /> : <FaInstagram className="text-pink-500 text-2xl size-6" />}
+												<span className="font-medium">{platform}</span>
+												<ChevronDownIcon />
+											</Button>
+										</DropdownMenuTrigger>
+										<DropdownMenuContent align="center" className="w-[200px]">
+											<DropdownMenuGroup>
+												<DropdownMenuItem className="p-1" onClick={() => setPlatform("whatsapp")}>
+													<a href="#" className="flex items-center gap-2">
+														<FaWhatsapp className="text-green-500 text-2xl" />
+														<span>WhatsApp</span>
+													</a>
+												</DropdownMenuItem>
+												<DropdownMenuItem className="p-1" onClick={() => setPlatform("telegram")}>
+													<a href="#" className="flex items-center gap-2">
+														<FaTelegram className="text-sky-500 text-2xl" />
+														<span>Telegram</span>
+													</a>
+												</DropdownMenuItem>
+												<DropdownMenuItem className="p-1" onClick={() => setPlatform("instagram")}>
+													<a href="#" className="flex items-center gap-2">
+														<FaInstagram className="text-pink-500 text-2xl" />
+														<span>Instagram</span>
+													</a>
+												</DropdownMenuItem>
+											</DropdownMenuGroup>
+										</DropdownMenuContent>
+									</DropdownMenu>
 								</div>
 								<DialogFooter>
 									<DialogClose asChild>
@@ -85,7 +122,7 @@ export const columns = (removeNumber: (id: string) => void, editNumber: (id: str
 											بستن
 										</Button>
 									</DialogClose>
-									<Button className="font-dana" type="submit" onClick={() => editNumber(numbers.id, number,numbers.platform)}>
+									<Button className="font-dana" type="submit" onClick={() => editNumber(numbers.id, number, platform, numbers.show)}>
 										ویرایش
 									</Button>
 								</DialogFooter>
@@ -144,11 +181,12 @@ export function NumbersTable({ data }: { data: Numbers[] }) {
 			});
 	};
 
-	const editNumber = async (id: string, number: string, platform: string) => {
+	const editNumber = async (id: string, number: string, platform: string, show: boolean) => {
 		const data = {
 			id,
 			number,
 			platform,
+			show,
 		};
 
 		await apiRequests
@@ -161,10 +199,19 @@ export function NumbersTable({ data }: { data: Numbers[] }) {
 				Alert("error", "شماره ویرایش نشد");
 			});
 	};
+	const toggleShow = async (id: string, show: boolean) => {
+		await apiRequests
+			.patch(`/numbers/${id}`, { show: !show })
+			.then((res) => {
+				setNumbers((prev) => prev.map((p) => (p.id === id ? { ...p, show: !show } : p)));
+				Alert("success", show ? "شماره پنهان شد" : "شماره نمایش داده شد");
+			})
+			.catch((res) => Alert("error", "شماره محصول تغییری نکرد"));
+	};
 
 	const table = useReactTable({
 		data: numbers,
-		columns: columns(removeNumber, editNumber),
+		columns: columns(removeNumber, editNumber, toggleShow),
 		onSortingChange: setSorting,
 		onColumnFiltersChange: setColumnFilters,
 		getCoreRowModel: getCoreRowModel(),
@@ -214,5 +261,12 @@ export function NumbersTable({ data }: { data: Numbers[] }) {
 				</Table>
 			</div>
 		</div>
+	);
+}
+function ChevronDownIcon() {
+	return (
+		<svg className="h-4 w-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+			<path d="m6 9 6 6 6-6" />
+		</svg>
 	);
 }

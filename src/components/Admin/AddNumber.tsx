@@ -7,7 +7,6 @@ import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import Alert from "@/lib/Alert";
 import apiRequests from "@/services/config";
-import styled from "styled-components";
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuGroup, DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import { FaWhatsapp } from "react-icons/fa";
 import { FaTelegram } from "react-icons/fa";
@@ -29,7 +28,8 @@ export default function AddNumber() {
 
 		const data = {
 			number,
-			platform,
+			platform, 
+			show : true
 		};
 
 		apiRequests

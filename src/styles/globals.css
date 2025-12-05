@@ -27,6 +27,11 @@
 		font-display: swap;
 		src: url("/fonts/Dana-Bold.woff2") format("woff2");
 	}
+	@font-face {
+		font-family: "Anta-Regular";
+		font-display: swap;
+		src: url("/fonts/Anta-Regular.ttf") format("truetype");
+	}
 }
 @utility container {
 	@apply xl:px-27.5 mx-auto;
@@ -36,6 +41,7 @@
 	--font-poppinsBold: "Poppins-Bold";
 	--font-dana: "Dana";
 	--font-danaBold: "Dana Bold";
+	--font-anta: "Anta-Regular";
 
 	--color-primary: #733b17;
 	--color-secondary: #d2b08d;

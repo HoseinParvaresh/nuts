@@ -1,18 +1,10 @@
 "use client";
 
 import { HiMiniBars3 } from "react-icons/hi2";
-import { CiSearch } from "react-icons/ci";
-import { IoNotificationsOutline } from "react-icons/io5";
-import { IoCartOutline } from "react-icons/io5";
 import Link from "next/link";
-import { FiSearch } from "react-icons/fi";
-import { FaWhatsapp } from "react-icons/fa";
-import { FaTelegram } from "react-icons/fa";
 import { HiMiniXMark } from "react-icons/hi2";
 import { useState } from "react";
-import * as motion from "motion/react-client";
 import moment from "moment-jalaali";
-import { HiOutlineSquares2X2 } from "react-icons/hi2";
 
 export default function DashboardHeader() {
 	moment.loadPersian({ dialect: "persian-modern" });
@@ -52,6 +44,9 @@ export default function DashboardHeader() {
 					</li>
 					<li>
 						<a href="/admin/numbers">لیست شماره ها</a>
+					</li>
+					<li>
+						<a href="/admin/logos">مدیریت لوگو ها</a>
 					</li>
 				</ul>
 			</div>
