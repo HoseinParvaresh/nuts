@@ -194,13 +194,13 @@ export default function HeaderLogoSettings() {
 
 							{/* number */}
 							<div className="flex flex-col gap-4">
-								<a target="blank" href="/" className="bg-green-50 border border-green-200 rounded-xl p-3 flex items-center gap-2 font-anta">
+								<a target="blank" href="/" className="bg-green-50 border border-green-200 rounded-xl p-3 flex items-center gap-2 font-Roboto">
 									<FaWhatsapp className="text-green-600 text-2xl xs:text-3xl" />
 									<span className="text-green-700 font-medium text-base xs:text-[22px]">
 										WhatsApp <span className="hidden lg:inline">( Country IRAN )</span> <span className="font-bold xs:text-2xl text-lg tracking-wider">+989931882813</span>
 									</span>
 								</a>
-								<a target="blank" href="/" className={`bg-sky-50 border border-sky-200 rounded-xl p-3 flex items-center gap-2 font-anta`}>
+								<a target="blank" href="/" className={`bg-sky-50 border border-sky-200 rounded-xl p-3 flex items-center gap-2 font-Roboto`}>
 									<FaTelegram className="text-sky-600 text-2xl xs:text-3xl" />
 									<span className="text-sky-700 font-medium text-base xs:text-[22px]">
 										Telegram <span className="hidden lg:inline">( Country IRAN )</span> <span className="xs:text-2xl text-lg font-bold tracking-wider">+989931882813</span>

@@ -1,4 +1,3 @@
-import apiRequests from "@/services/config";
 import Product from "@/components/Product/Product";
 export type Product = {
 	id: string;

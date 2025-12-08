@@ -41,14 +41,14 @@ export default function Header({logos} : {logos : Logo[]}) {
 	}
 	function searchProducts() {
 		if (!search.trim()) return;
-		router.push(`/search?query=${search}`);
-	}
+		window.open(`/search?query=${search}`, "_blank");
+		}
 	return (
 		<div className="relative border-b border-primary/20">
 			{/* layout */}
 			<div onClick={navbarToggle} className={`w-full ${toggle} fixed h-screen z-10 bg-black/30`}></div>
 			{/* header */}
-			<div className="flex justify-between items-start px-2 4xs:px-3 2xs:px-5 md:px-0 lg:px-25 py-5 gap-3 4xs:gap-4 2xs:gap-5">
+			<div className="flex justify-between items-start px-2 4xs:px-3 2xs:px-5 md:px-0 lg:px-18 py-5 gap-3 4xs:gap-4 2xs:gap-5">
 				{/* bar icon */}
 				<div onClick={navbarToggle} className="md:hidden mt-1">
 					<HiMiniBars3 className="size-7" />
@@ -80,21 +80,21 @@ export default function Header({logos} : {logos : Logo[]}) {
 							(n) =>
 								n.show &&
 								(n.platform === "whatsapp" ? (
-									<a key={n.id} target="blank" href={`https://wa.me/${n.number}`} className="bg-green-50 border border-green-200 rounded-xl p-3 flex items-center gap-2 font-anta">
+									<a key={n.id} target="blank" href={`https://wa.me/${n.number}`} className="bg-green-50 border border-green-200 rounded-xl p-3 flex items-center gap-2 font-Roboto">
 										<FaWhatsapp className="text-green-600 text-2xl xs:text-3xl" />
 										<span className="text-green-700 font-medium text-base xs:text-[22px]">
-											WhatsApp <span className="hidden lg:inline">( Country IRAN )</span> <span className="font-bold xs:text-2xl text-lg tracking-wider">{n.number}</span>
+											WhatsApp <span className="hidden lg:inline">( Country IRAN )</span> <span className="font-bold xs:text-2xl text-lg tracking-wider text-center ml-0 3xs:ml-3 2xs:ml-8 xs:ml-13 lg:ml-0 xl:ml-15">{n.number}</span>
 										</span>
 									</a>
 								) : n.platform === "telegram" ? (
-									<a key={n.id} target="blank" href={`https://t.me/${n.number}`} className={`bg-sky-50 border border-sky-200 rounded-xl p-3 flex items-center gap-2 font-anta`}>
+									<a key={n.id} target="blank" href={`https://t.me/${n.number}`} className={`bg-sky-50 border border-sky-200 rounded-xl p-3 flex items-center gap-2 font-Roboto`}>
 										<FaTelegram className="text-sky-600 text-2xl xs:text-3xl" />
 										<span className="text-sky-700 font-medium text-base xs:text-[22px]">
-											Telegram <span className="hidden lg:inline">( Country IRAN )</span> <span className="xs:text-2xl text-lg font-bold tracking-wider">{n.number}</span>
+											Telegram <span className="hidden lg:inline">( Country IRAN )</span> <span className="xs:text-2xl text-lg font-bold tracking-wider ml-0 3xs:ml-5 2xs:ml-10 xs:ml-16 lg:ml-0 xl:ml-18">{n.number}</span>
 										</span>
 									</a>
 								) : (
-									<a key={n.id} target="blank" href={`https://instagram.com/${n.number}`} className={`bg-pink-50 border border-pink-200 rounded-xl p-3 flex items-center gap-2 font-anta`}>
+									<a key={n.id} target="blank" href={`https://instagram.com/${n.number}`} className={`bg-pink-50 border border-pink-200 rounded-xl p-3 flex items-center gap-2 font-Roboto`}>
 										<FaInstagram className="text-pink-600 text-2xl xs:text-3xl" />
 										<span className="text-pink-700 font-medium text-base xs:text-[22px]">
 											Instagram <span className="hidden lg:inline">( Country IRAN )</span> <span className="font-bold xs:text-2xl text-lg tracking-wider">{n.number}</span>

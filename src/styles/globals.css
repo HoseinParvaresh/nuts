@@ -13,11 +13,6 @@
 		src: url("/fonts/Poppins-Bold.ttf") format("truetype");
 	}
 	@font-face {
-		font-family: "Poppins-ExtraBold";
-		font-display: swap;
-		src: url("/fonts/Poppins-ExtraBold.ttf") format("truetype");
-	}
-	@font-face {
 		font-family: "Dana";
 		font-display: swap;
 		src: url("/fonts/Dana.Regular.woff2") format("woff2");
@@ -28,9 +23,9 @@
 		src: url("/fonts/Dana-Bold.woff2") format("woff2");
 	}
 	@font-face {
-		font-family: "Anta-Regular";
+		font-family: "Roboto-Regular";
 		font-display: swap;
-		src: url("/fonts/Anta-Regular.ttf") format("truetype");
+		src: url("/fonts/Roboto-Regular.ttf") format("truetype");
 	}
 }
 @utility container {
@@ -41,7 +36,7 @@
 	--font-poppinsBold: "Poppins-Bold";
 	--font-dana: "Dana";
 	--font-danaBold: "Dana Bold";
-	--font-anta: "Anta-Regular";
+	--font-Roboto: "Roboto-Regular";
 
 	--color-primary: #733b17;
 	--color-secondary: #d2b08d;
