@@ -6,7 +6,7 @@ import "react-image-gallery/styles/css/image-gallery.css";
 export type Product = {
 	id: string;
 	title: string;
-	images: [{ image1: string; primary: boolean }, { image2: string; primary: boolean }, { image3: string; primary: boolean }, { image4: string; primary: boolean }, { image5: string; primary: boolean }];
+	images: [{ image1: string; primary: boolean }, { image2: string; primary: boolean }, { image3: string; primary: boolean }];
 	show: boolean;
 	description: string;
 	main: boolean;
@@ -24,29 +24,21 @@ export default function Product({ productData }: { productData: Product }) {
 	const renderThumbInner = (item : any) => {
 		return (
 			<div className="bg-white">
-				<img src={item.thumbnail || null} className={"rounded-full"} alt="" />
+				<img src={item.thumbnail || null} className={productData.main ? "rounded-none" : "rounded-full" } alt="" />
 			</div>
 		);
 	};
 
 	const images = [
-		{
-			original: productData.images[1]?.image2,
-			thumbnail: productData.images[1]?.image2,
-		},
-		{
-			original: productData.images[2]?.image3,
-			thumbnail: productData.images[2]?.image3,
-		},
-		{
-			original: productData.images[3]?.image4,
-			thumbnail: productData.images[3]?.image4,
-		},
-		{
-			original: productData.images[4]?.image5,
-			thumbnail: productData.images[4]?.image5,
-		},
-	];
+		productData.images[1]?.image2,
+		productData.images[2]?.image3,
+	  ]
+		.filter(Boolean) 
+		.map((img) => ({
+		  original: img,
+		  thumbnail: img,
+		}));
+
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
@@ -66,7 +58,7 @@ export default function Product({ productData }: { productData: Product }) {
 	return (
 		<>
 			<div onClick={() => openModal(productData)} className="bg-white min-h-[418px] relative rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100 overflow-hidden">
-				<img src={productData.images[0].image1} className={` w-full object-cover object-top bg-gray-50 hover:scale-110 transition-transform  ${productData.main ? "rounded-none" : "rounded-full"}`} />
+				<img src={productData.images[0].image1} className={` w-full object-cover max-h-[270px] object-center bg-gray-50 hover:scale-110 transition-transform  ${productData.main ? "rounded-none" : "rounded-full"}`} />
 				<div onClick={() => openModal(productData)} className="p-4 text-center cursor-pointer">
 					<h3 className="text-lg/6 font-semibold text-gray-800 line-clamp-2 h-12">{productData.title}</h3>
 					<p className="text-[15px] text-gray-600 mt-4 line-clamp-2 h-[45px] text-left">{productData.description}</p>

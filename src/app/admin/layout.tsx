@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import DashboardHeader from "@/components/Admin/DashboardHeader";
 export const metadata: Metadata = {
 	title: "Dashboard",
 	description: "AdminDashboard",

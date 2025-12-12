@@ -6,11 +6,10 @@ import { motion } from "motion/react";
 export type Product = {
 	id: string;
 	title: string;
-	images: [{ image1: string; primary: boolean }, { image2: string; primary: boolean },{ image3: string; primary: boolean },{ image4: string; primary: boolean },{ image5: string; primary: boolean }];
+	images: [{ image1: string; primary: boolean }, { image2: string; primary: boolean },{ image3: string; primary: boolean }];
 	show: boolean;
 	description: string
 	main: boolean
-
 };
 export default function Main({ data }: { data: Product[] }) {
 	return (
